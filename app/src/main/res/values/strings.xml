@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Life Donor: Blood Bank</string>
+    <string name="mainTitle">Life Donor</string>
+    <string name="subtitle">Blood donation is a noble cause and can save lives. Donate Now!</string>
+    <string name="emailHint">Enter Email Address</string>
+    <string name="passwordHint">Enter Password</string>
+    <string name="nameHint">Enter Full Name</string>
+    <string name="contactHint">Enter Contact Number</string>
+    <string name="bloodgrpHint">Enter Blood Group</string>
+    <string name="loginBtn">Log In</string>
+    <string name="signupDonor">Sign up as a Donor</string>
+    <string name="signupBB">Sign up as a Blood Bank</string>
+    <string name="signup">Sign up</string>
+</resources>
