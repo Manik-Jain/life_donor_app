@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(mAuth.getCurrentUser() != null)
         {
-//            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-//            startActivity(intent);
-//            finish();
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 

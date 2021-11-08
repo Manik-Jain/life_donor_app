@@ -46,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                        System.out.println(email);
-                                        System.out.println(password);
                                         if (!task.isSuccessful()) {
                                             Toast.makeText(getApplicationContext(),
                                                     "Authentication Failed",
@@ -57,9 +55,9 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(),
                                                     "Authentication Success",
                                                     Toast.LENGTH_LONG).show();
-//                                            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-//                                            startActivity(intent);
-//                                            finish();
+                                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     }
                                 });

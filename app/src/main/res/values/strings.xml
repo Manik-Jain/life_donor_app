@@ -11,4 +11,7 @@
     <string name="signupDonor">Sign up as a Donor</string>
     <string name="signupBB">Sign up as a Blood Bank</string>
     <string name="signup">Sign up</string>
+    <string name="logout">Logout</string>
+    <string name="myProfile">My Account</string>
+    <string name="saveBtn">Save Details</string>
 </resources>

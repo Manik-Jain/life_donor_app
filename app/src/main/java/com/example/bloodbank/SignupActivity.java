@@ -3,6 +3,7 @@ package com.example.bloodbank;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +24,10 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword, fullName, bloodGrp, contact;
+    private EditText inputEmail, inputPassword, fullName, bloodGrp, phone;
     private FirebaseAuth mAuth;
     private Button signupBtn;
-    private FirebaseFirestore db_User;
+    private FirebaseFirestore db_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,14 @@ public class SignupActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_signup_bb);
         }
-        db_User = FirebaseFirestore.getInstance();
+        db_user = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         inputEmail = findViewById(R.id.editTextEmailAddress);
         inputPassword = findViewById(R.id.editTextPassword);
         fullName = findViewById(R.id.editTextName);
         bloodGrp = isDonor ? findViewById(R.id.editTextBloodGrp) : null;
-        contact = findViewById(R.id.editTextContact);
+        phone = findViewById(R.id.editTextPhone);
 
         signupBtn = findViewById(R.id.signupBtn);
 
@@ -54,16 +55,16 @@ public class SignupActivity extends AppCompatActivity {
                 final String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
                 final String name = fullName.getText().toString();
-                final String contactNum = contact.getText().toString();
+                final String phoneNum = phone.getText().toString();
                 final String bloodGroup = isDonor ? bloodGrp.getText().toString() : "";
 
                 try {
                     if (name.length() <= 2) {
                         ShowError("Name");
                         fullName.requestFocusFromTouch();
-                    } else if (contactNum.length() < 10) {
+                    } else if (phoneNum.length() < 10) {
                         ShowError("Contact Number");
-                        contact.requestFocusFromTouch();
+                        phone.requestFocusFromTouch();
                     } else if (email.length() == 0) {
                         ShowError("Email ID");
                         inputEmail.requestFocusFromTouch();
@@ -80,18 +81,22 @@ public class SignupActivity extends AppCompatActivity {
                                 } else {
                                     Map userData = new HashMap();
                                     userData.put("name", name);
-                                    userData.put("mobile", contactNum);
+                                    userData.put("phone", phoneNum);
                                     userData.put("bloodgroup", bloodGroup);
                                     userData.put("isDonor", isDonor);
                                     userData.put("email", email);
                                     userData.put("password", password);
+                                    userData.put("emergencyPhone", "");
                                     String id = mAuth.getCurrentUser().getUid();
-                                    db_User.collection("users").document(id).set(userData)
+                                    db_user.collection("users").document(id).set(userData)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Toast.makeText(getApplicationContext(), "Welcome, your account has been created!", Toast.LENGTH_LONG).show();
                                                     Log.d("success", "DocumentSnapshot successfully written!");
+                                                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
