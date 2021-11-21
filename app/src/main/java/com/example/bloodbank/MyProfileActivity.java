@@ -76,6 +76,7 @@ public class MyProfileActivity extends AppCompatActivity {
                         }
                     }
                 } else {
+                    Toast.makeText(MyProfileActivity.this, "Some error occurred. Please try again", Toast.LENGTH_LONG).show();
                     Log.d("error", "get failed with ", task.getException());
                 }
             }
@@ -85,6 +86,7 @@ public class MyProfileActivity extends AppCompatActivity {
     public void onLogoutClick(View view) {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
@@ -98,24 +100,20 @@ public class MyProfileActivity extends AppCompatActivity {
             updatedData.put("emergency", emergencyPhone.getText().toString());
         }
         if(!userEmail.equals(updatedData.get("email").toString())) {
-            System.out.println("email changes");
             current_user.updateEmail(updatedData.get("email").toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        System.out.println("updated email");
                         Log.d("Success", "User email address updated.");
                     }
                 }
             });
         }
         if(!userPassword.equals(updatedData.get("password").toString())) {
-            System.out.println("password changes");
             current_user.updatePassword(updatedData.get("password").toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        System.out.println("updated password");
                         Log.d("Success", "User password updated.");
                     }
                 }
@@ -124,14 +122,14 @@ public class MyProfileActivity extends AppCompatActivity {
         user.update(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(MyProfileActivity.this,
                         "Account data successfully updated!",
                         Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(MyProfileActivity.this,
                         "Some error occurred. Please try again.",
                         Toast.LENGTH_LONG).show();
                 Log.w("Error", "Error updating document", e);

@@ -30,20 +30,17 @@ public class MainActivity extends AppCompatActivity {
     public void onLoginClick(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        finish();
     }
 
     public void onSignupDonorClick(View view) {
         Intent intent = new Intent(this, SignupActivity.class);
         intent.putExtra("isDonor", true);
         startActivity(intent);
-        finish();
     }
 
     public void onSignupBBClick(View view) {
         Intent intent = new Intent(this, SignupActivity.class);
         intent.putExtra("isDonor", false);
         startActivity(intent);
-        finish();
     }
 }

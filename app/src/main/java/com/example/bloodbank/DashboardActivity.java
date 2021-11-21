@@ -68,6 +68,5 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyProfileActivity.class);
         intent.putExtra("isDonor", isDonor);
         startActivity(intent);
-        finish();
     }
 }
