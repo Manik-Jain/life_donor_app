@@ -95,6 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), "Welcome, your account has been created!", Toast.LENGTH_LONG).show();
                                                     Log.d("success", "DocumentSnapshot successfully written!");
                                                     Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                                     startActivity(intent);
                                                     finish();
                                                 }
@@ -106,11 +107,6 @@ public class SignupActivity extends AppCompatActivity {
                                                     Log.w("error", "Error writing document", e);
                                                 }
                                             });
-                                    Toast.makeText(getApplicationContext(), "Welcome, your account has been created!", Toast.LENGTH_LONG).show();
-//                                                    Intent intent = new Intent(ProfileActivity.this, Dashboard.class);
-//                                                    startActivity(intent);
-//
-//                                                    finish();
                                 }
 
                             }
