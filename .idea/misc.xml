@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_dashboard.xml" value="0.22522522522522523" />
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_login.xml" value="0.22522522522522523" />
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_main.xml" value="0.22522522522522523" />
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_my_bbprofile.xml" value="0.22522522522522523" />
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_my_profile.xml" value="0.22522522522522523" />
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_signup_bb.xml" value="0.22522522522522523" />
+        <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout-land/activity_signup_donor.xml" value="0.22522522522522523" />
         <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout/activity_dashboard.xml" value="0.16" />
         <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Saloni Yadav/AndroidStudioProjects/BloodBank/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
