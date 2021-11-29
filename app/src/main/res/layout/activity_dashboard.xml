@@ -70,6 +70,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="416dp"
         android:layout_height="76dp"

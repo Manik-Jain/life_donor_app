@@ -69,4 +69,9 @@ public class DashboardActivity extends AppCompatActivity {
         intent.putExtra("isDonor", isDonor);
         startActivity(intent);
     }
+
+    public void createNewReq(View view) {
+        Intent intent = new Intent(this, CreateRequest.class);
+        startActivity(intent);
+    }
 }

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BloodBank">
         <activity
+            android:name=".CreateRequest"
+            android:exported="false" />
+        <activity
             android:name=".MyProfileActivity"
             android:exported="false" />
         <activity

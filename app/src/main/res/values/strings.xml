@@ -14,4 +14,6 @@
     <string name="logout">Logout</string>
     <string name="myProfile">My Account</string>
     <string name="saveBtn">Save Details</string>
+    <string name="createRequest">Create Request</string>
+    <string name="createRequest_btn">Create</string>
 </resources>
