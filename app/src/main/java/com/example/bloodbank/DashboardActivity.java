@@ -69,4 +69,18 @@ public class DashboardActivity extends AppCompatActivity {
         intent.putExtra("isDonor", isDonor);
         startActivity(intent);
     }
+
+    public void showRequestsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", true);
+        startActivity(intent);
+    }
+
+    public void showDonationsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", false);
+        startActivity(intent);
+    }
 }

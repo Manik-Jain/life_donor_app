@@ -14,4 +14,6 @@
     <string name="logout">Logout</string>
     <string name="myProfile">My Account</string>
     <string name="saveBtn">Save Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
