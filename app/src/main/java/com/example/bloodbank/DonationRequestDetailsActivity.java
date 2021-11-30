@@ -3,8 +3,10 @@ package com.example.bloodbank;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +25,7 @@ public class DonationRequestDetailsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseUser current_user;
-    private TextView name, addressOrBG, contact, date, pageHeading;
+    private TextView name, addressOrBG, contact, date, pageHeading, hospital, isEmergency;
     private Boolean isDonor, isRequestPage;
     private String itemID;
 
@@ -45,6 +47,8 @@ public class DonationRequestDetailsActivity extends AppCompatActivity {
         addressOrBG = findViewById(R.id.addressOrBGText);
         contact = findViewById(R.id.contactText);
         date = findViewById(R.id.dateText);
+        hospital = findViewById(R.id.hospitalNameText);
+        isEmergency = findViewById(R.id.emergencyText);
         pageHeading = findViewById(R.id.pageHeading);
 
         if(isRequestPage) {
@@ -69,11 +73,33 @@ public class DonationRequestDetailsActivity extends AppCompatActivity {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                     String dateString = format.format(dateObj);
                     date.setText("Date: " + dateString);
+                    hospital.setText(document.get("hospital").toString());
+                    isEmergency.setText(document.get("emergency").toString() == "true" ? "URGENT" : "");
                 } else {
                     Log.d("error", "get failed with ", task.getException());
                 }
             }
         });
 
+    }
+
+    public void onMyProfileClick(View view) {
+        Intent intent = new Intent(this, MyProfileActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        startActivity(intent);
+    }
+
+    public void showRequestsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", true);
+        startActivity(intent);
+    }
+
+    public void showDonationsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", false);
+        startActivity(intent);
     }
 }

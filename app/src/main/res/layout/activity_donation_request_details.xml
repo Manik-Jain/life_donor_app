@@ -35,7 +35,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/nameText"
@@ -47,7 +47,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/addressOrBGText"
@@ -58,7 +58,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/contactText"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="20dp"/>
                 <TextView
                     android:id="@+id/contactText"
                     android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/dateText"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="20dp"/>
                 <TextView
                     android:id="@+id/dateText"
                     android:layout_width="wrap_content"
@@ -77,8 +77,30 @@
                     android:textSize="@dimen/text_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/hospitalNameText"
+                    android:layout_marginBottom="20dp"/>
+                <TextView
+                    android:id="@+id/hospitalNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:textSize="@dimen/text_medium"
+                    app:layout_constraintBottom_toTopOf="@id/emergencyText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dateText"
+                    android:layout_marginBottom="20dp"/>
+                <TextView
+                    android:id="@+id/emergencyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/hospitalNameText"
+                    android:textSize="@dimen/text_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/red"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

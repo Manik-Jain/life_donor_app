@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -22,6 +23,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private QuerySnapshot querySnap;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private LinearLayout linearLayout;
 
     // data is passed into the constructor
     RecyclerViewAdapter(Context context, QuerySnapshot q) {
@@ -41,13 +43,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if(position == querySnap.size()-1) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0,0,0,500);
+            linearLayout.setLayoutParams(params);
+        }
         Long dateCreated = Long.parseLong(mData.get(position).getId().toString().split("_")[1]);
         Date dateObj = new Date(dateCreated);
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         String dateString = format.format(dateObj);
         holder.getTextView("name").setText("Name: " + mData.get(position).get("name").toString());
         holder.getTextView("date").setText("Date: " + dateString);
-        holder.getTextView("contact").setText("Contact: " + mData.get(position).get("phone").toString());
+        holder.getTextView("emergency").setText(mData.get(position).get("emergency").toString() == "true" ? "Urgent" : "");
         holder.getTextView("bloodGroup").setText("Blood Group: " + mData.get(position).get("bloodGroup").toString());
 
     }
@@ -62,15 +71,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView myCardView;
-        TextView name, date, contact, bloodGroup;
+        TextView name, date, emergency, bloodGroup;
 
         ViewHolder(View itemView) {
             super(itemView);
             myCardView = itemView.findViewById(R.id.detailsCard);
             name = itemView.findViewById(R.id.nameText);
             date = itemView.findViewById(R.id.dateText);
-            contact = itemView.findViewById(R.id.contactText);
+            emergency = itemView.findViewById(R.id.emergencyText);
             bloodGroup = itemView.findViewById(R.id.bloodGrpText);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
             itemView.setOnClickListener(this);
         }
 
@@ -78,7 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             switch (type) {
                 case "name": return name;
                 case "date": return date;
-                case "contact": return contact;
+                case "emergency": return emergency;
                 case "bloodGroup": return bloodGroup;
             }
             return name;

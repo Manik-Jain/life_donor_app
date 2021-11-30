@@ -12,4 +12,5 @@
     <color name="btn_success">#0BCE83</color>
     <color name="btn_transparent">#f5f0e1</color>
     <color name="text_neutral">#9586A8</color>
+    <color name="red">#ab0000</color>
 </resources>

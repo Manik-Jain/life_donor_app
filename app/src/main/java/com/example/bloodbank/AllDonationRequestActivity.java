@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,6 +90,26 @@ public class AllDonationRequestActivity extends AppCompatActivity implements Rec
         intent.putExtra("isDonor", isDonor);
         intent.putExtra("isRequestsPage", isRequestPage);
         intent.putExtra("itemID", q.getDocuments().get(position).getId());
+        startActivity(intent);
+    }
+
+    public void onMyProfileClick(View view) {
+        Intent intent = new Intent(this, MyProfileActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        startActivity(intent);
+    }
+
+    public void showRequestsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", true);
+        startActivity(intent);
+    }
+
+    public void showDonationsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", false);
         startActivity(intent);
     }
 }
