@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="style_header">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="textAllCaps">true</item>
+    </style>
+    <style name="style_textbox">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/text_neutral</item>
+        <item name="android:gravity">center</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:background">@color/browser_actions_bg_grey</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+    <style name="style_createReq_Text">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="style_button">
+        <item name="android:backgroundTint">@color/btn_success</item>
+
+    </style>
+
+</resources>

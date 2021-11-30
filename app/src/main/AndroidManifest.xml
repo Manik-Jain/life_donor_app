@@ -16,6 +16,9 @@
             android:name=".DonationRequestDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".CreateRequest"
+            android:exported="false" />
+        <activity
             android:name=".MyProfileActivity"
             android:exported="false" />
         <activity
