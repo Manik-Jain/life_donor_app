@@ -44,7 +44,7 @@ public class CreateRequest extends AppCompatActivity {
 
         emergencyYes = findViewById(R.id.createReqChkYes);
         emergencyNo = findViewById(R.id.createReqChkNo);
-        fillAddress = findViewById(R.id.createReqFillAddress);
+
 
         db_request = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -86,13 +86,17 @@ public class CreateRequest extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(getApplicationContext(), "Your Request has been created", Toast.LENGTH_LONG).show();
                                 Log.d("success", "New request successfully created");
+                                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(getApplicationContext(), "Not added data!", Toast.LENGTH_LONG).show();
-                                Log.w("error", "Error writing document", e);
+                                Log.w("error", "Error creating the request", e);
                             }
                         });
               db_request.collection("Requests").document(id).get();
@@ -107,10 +111,16 @@ public class CreateRequest extends AppCompatActivity {
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.createReqChkYes:
+            {
                 emergencyNo.setChecked(false);
+                emergencyYes.setChecked(true);
+            }
                 break;
             case R.id.createReqChkNo:
+             {
+                emergencyNo.setChecked(true);
                 emergencyYes.setChecked(false);
+            }
             default: emergencyNo.setChecked(false);
         }
     }

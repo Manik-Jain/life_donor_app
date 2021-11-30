@@ -112,4 +112,8 @@ public class AllDonationRequestActivity extends AppCompatActivity implements Rec
         intent.putExtra("isRequestsPage", false);
         startActivity(intent);
     }
+    public void createNewReq(View view) {
+        Intent intent = new Intent(this, CreateRequest.class);
+        startActivity(intent);
+    }
 }
