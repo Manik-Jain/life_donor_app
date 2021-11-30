@@ -7,25 +7,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db_user;
+    private FirebaseFirestore db;
     private FirebaseUser current_user;
     private TextView username, summary_text, donations_text;
     private Boolean isDonor;
+    private int donationCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +35,25 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         mAuth = FirebaseAuth.getInstance();
-        db_user = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         current_user = mAuth.getCurrentUser();
         username = findViewById(R.id.userNameText);
         summary_text = findViewById(R.id.summaryText);
         donations_text = findViewById(R.id.donationsText);
-        DocumentReference user = db_user.collection("users").document(current_user.getUid());
+        DocumentReference user = db.collection("users").document(current_user.getUid());
+        CollectionReference donations = db.collection("donations");
+        Query query = donations.whereEqualTo("requestorID", current_user.getUid());
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    donationCount = task.getResult().size();
+                } else {
+                    Log.d("error", "get failed with ", task.getException());
+                }
+            }
+        });
+
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -49,9 +64,9 @@ public class DashboardActivity extends AppCompatActivity {
                         username.setText("Hi "+ userData.get("name").toString().split(" ")[0]);
                         if(isDonor) {
                             summary_text.setText("Blood Group: " + userData.get("bloodgroup").toString());
-                            donations_text.setText("Total Donations: ");
+                            donations_text.setText("Total Donations: " + donationCount);
                         } else {
-                            summary_text.setText("Patients served: ");
+                            summary_text.setText("Patients served: " + donationCount);
                         }
 
                     }
@@ -70,6 +85,20 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showRequestsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", true);
+        startActivity(intent);
+    }
+
+    public void showDonationsList(View view) {
+        Intent intent = new Intent(this, AllDonationRequestActivity.class);
+        intent.putExtra("isDonor", isDonor);
+        intent.putExtra("isRequestsPage", false);
+        startActivity(intent);
+    }
+  
     public void createNewReq(View view) {
         Intent intent = new Intent(this, CreateRequest.class);
         startActivity(intent);
