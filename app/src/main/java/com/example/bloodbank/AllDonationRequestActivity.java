@@ -52,17 +52,19 @@ public class AllDonationRequestActivity extends AppCompatActivity implements Rec
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-
+        Query query;
         if(isRequestPage) {
             pageHeading.setText("Requests");
             collection = db.collection("Requests");
+            query = collection.whereEqualTo("requestorID", current_user.getUid());
         } else {
             pageHeading.setText(isDonor ? "My Donations" : "All Donors");
             collection = db.collection("donations");
+            query = collection.whereEqualTo(isDonor? "donorID" : "hospitalID", current_user.getUid());
         }
 
 
-        Query query = collection.whereEqualTo("requestorID", current_user.getUid());
+
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

@@ -42,18 +42,6 @@ public class DashboardActivity extends AppCompatActivity {
         donations_text = findViewById(R.id.donationsText);
         DocumentReference user = db.collection("users").document(current_user.getUid());
         CollectionReference donations = db.collection("donations");
-        Query query = donations.whereEqualTo("requestorID", current_user.getUid());
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    donationCount = task.getResult().size();
-                } else {
-                    Log.d("error", "get failed with ", task.getException());
-                }
-            }
-        });
-
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -64,9 +52,31 @@ public class DashboardActivity extends AppCompatActivity {
                         username.setText("Hi "+ userData.get("name").toString().split(" ")[0]);
                         if(isDonor) {
                             summary_text.setText("Blood Group: " + userData.get("bloodgroup").toString());
-                            donations_text.setText("Total Donations: " + donationCount);
+                            Query query = donations.whereEqualTo("donorID", current_user.getUid());
+                            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        donationCount = task.getResult().size();
+                                        donations_text.setText("Total Donations: " + donationCount);
+                                    } else {
+                                        Log.d("error", "get failed with ", task.getException());
+                                    }
+                                }
+                            });
                         } else {
-                            summary_text.setText("Patients served: " + donationCount);
+                            Query query = donations.whereEqualTo("hospitalID", current_user.getUid());
+                            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        donationCount = task.getResult().size();
+                                        summary_text.setText("Patients served: " + donationCount);
+                                    } else {
+                                        Log.d("error", "get failed with ", task.getException());
+                                    }
+                                }
+                            });
                         }
 
                     }
