@@ -64,6 +64,8 @@ public class DonationRequestDetailsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
+                    String hospitalName = document.get("hospital") != null ? document.get("hospital").toString() : "";
+                    Boolean isEmergencyBool = document.get("emergency") != null ? Boolean.parseBoolean(document.get("emergency").toString()): false;
                     name.setText("Name: " + document.get("name").toString());
                     contact.setText("Contact: " + document.get("phone").toString());
                     addressOrBG.setText(isDonor ? "Blood Group: " + document.get("bloodGroup").toString() :
@@ -73,8 +75,8 @@ public class DonationRequestDetailsActivity extends AppCompatActivity {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                     String dateString = format.format(dateObj);
                     date.setText("Date: " + dateString);
-                    hospital.setText(document.get("hospital").toString());
-                    isEmergency.setText(document.get("emergency").toString() == "true" ? "URGENT" : "");
+                    hospital.setText(hospitalName);
+                    isEmergency.setText(isEmergencyBool ? "URGENT" : "");
                 } else {
                     Log.d("error", "get failed with ", task.getException());
                 }

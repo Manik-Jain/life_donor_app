@@ -52,11 +52,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         Long dateCreated = Long.parseLong(mData.get(position).getId().toString().split("_")[1]);
         Date dateObj = new Date(dateCreated);
+        Boolean isEmergency = mData.get(position).get("emergency") != null ? Boolean.parseBoolean(mData.get(position).get("emergency").toString()): false;
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         String dateString = format.format(dateObj);
         holder.getTextView("name").setText("Name: " + mData.get(position).get("name").toString());
         holder.getTextView("date").setText("Date: " + dateString);
-        holder.getTextView("emergency").setText(mData.get(position).get("emergency").toString() == "true" ? "Urgent" : "");
+        holder.getTextView("emergency").setText( isEmergency ? "Urgent" : "");
         holder.getTextView("bloodGroup").setText("Blood Group: " + mData.get(position).get("bloodGroup").toString());
 
     }
